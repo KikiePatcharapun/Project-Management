@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PO/PM/Dev Daily Workflow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .workflow-step {
+            transition: all 0.3s ease;
+        }
+        .workflow-step:hover {
+            transform: scale(1.02);
+        }
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid #cbd5e1;
+            margin: 8px auto;
+        }
+        .arrow-right {
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 15px solid #cbd5e1;
+        }
+        .connector-line {
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(to bottom, #cbd5e1, #94a3b8);
+            margin: 0 auto;
+        }
+        .role-po { border-left: 4px solid #f59e0b; }
+        .role-pm { border-left: 4px solid #3b82f6; }
+        .role-dev { border-left: 4px solid #10b981; }
+        .tool-internal { background: linear-gradient(135deg, #fef3c7, #fde68a); }
+        .tool-gitea { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+        .tool-discord { background: linear-gradient(135deg, #e9d5ff, #d8b4fe); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i data-lucide="git-branch" class="w-8 h-8 text-indigo-600"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">TW Development Workflow (updated Q2 '26)</h1>
+                    </div>
+                    <div class="flex space-x-2 ml-4">
+                        <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm font-medium">📋 Mellowmatic</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">📊 Gitea Board</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">💬 Discord</span>
+                    </div>
+                </div>
+                <div class="mt-2 text-sm text-blue-700 bg-blue-50 px-3 py-1 rounded inline-block">
+                    🔄 Daily Status Meeting: Teams ensure Mellowmatic + Gitea are up-to-date before meeting
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-6">
+        <!-- Key Daily Actions by Role -->
+        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Key Daily Actions by Role</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-8">
+            
+            <!-- PO Column -->
+            <div class="space-y-4">
+                <div class="bg-gradient-to-r from-amber-100 to-orange-100 rounded-lg p-4">
+                    <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2 mb-3">
+                        <span class="text-2xl">📋</span>
+                        PO
+                    </h2>
+                    <div class="space-y-3">
+                        <div class="bg-white rounded p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold text-amber-600">Mellowmatic</span>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Create main task with requirements</li>
+                                <li>• Define scope and acceptance criteria</li>
+                                <li>• Breakdown required teams on task description</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold text-purple-600">Discord</span>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Create new Discord post/thread: "New Feature: [Name]" with @PM</li>
+                                <li class="ml-4">- On Spec-working phase, give action plan and list required resources (reviewers/blockers)</li>
+                                <li>• Inform if briefing is needed or sufficient task details are given</li>
+                                <li>• Support development flow/gap when required</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold text-blue-600">Gitea</span>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Managing Spec to Spec done states</li>
+                                <li>• Support development flow/gap when required</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PM Column -->
+            <div class="space-y-4">
+                <div class="bg-gradient-to-r from-blue-100 to-indigo-100 rounded-lg p-4">
+                    <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2 mb-3">
+                        <span class="text-2xl">📊</span>
+                        PM
+                    </h2>
+                    <div class="space-y-3">
+                        <div class="bg-white rounded p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold text-purple-600">Discord</span>
+                            </div>
+                            <p class="text-sm text-gray-600">Read PO's Discord post with feature requirements</p>
+                        </div>
+                        <div class="bg-white rounded p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold text-amber-600">Mellowmatic</span>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Create tasks for required team as PO identified</li>
+                                <li>• Monitor if details are up-to-date based on discord communication</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold text-purple-600">Discord</span>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Tag @team-members in PO's thread with their assigned tasks</li>
+                                <li>• Make sure everyone understand what to do</li>
+                                <li>• Check daily: Blockers? Delays? Need help?</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold text-blue-600">Gitea Board</span>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Create "[Feature] - Main Task" with progress checklist</li>
+                                <li>• For ad-hoc support task, update when notified</li>
+                                <li>• Maintain correct card status</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dev/Design Column -->
+            <div class="space-y-4">
+                <div class="bg-gradient-to-r from-green-100 to-emerald-100 rounded-lg p-4">
+                    <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2 mb-3">
+                        <span class="text-2xl">💻</span>
+                        Dev/Design
+                    </h2>
+                    <div class="space-y-3">
+                        <div class="bg-white rounded p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold text-purple-600">Discord</span>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Check #pmo-dev, #pmo-design for team/product priority</li>
+                                <li>• Check mentioned (assigned tasks) and raise up if scope/action plan is unclear</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold text-amber-600">Mellowmatic</span>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Read Mellowmatic task details and estimate</li>
+                                <li>• Make sure your card remains true as a source of truth</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold text-purple-600">Discord</span>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Use thread to update progress, ask questions or separate #dev-room for internal team discussions</li>
+                                <li class="ml-4"><strong>Signtrust & Genesis (Throughwave server)</strong> > Current forum channel: new post for new spec, existing separated dev room (post)</li>
+                                <li class="ml-4"><strong>Fourgle (Fourgle Workspace server)</strong> > New thread for new spec (one new text channel), existing separated dev channel</li>
+                                <li>• Inform in the thread when there's a delay or re-estimation + update in Mellowmatic</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold text-blue-700">Gitea</span>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Recheck or correct status before/during status meeting</li>
+                                <li>• Raise blockers affecting your tasks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Gitea Columns Usage -->
+        <section class="mb-8">
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-200">
+                <h2 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                    <i data-lucide="git-branch" class="w-6 h-6 text-blue-600"></i>
+                    Gitea Columns Usage
+                </h2>
+                
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-4 text-sm text-gray-700">
+                    <span class="font-semibold">Remark:</span> To reflect real-time transition, card must be updated by task owner as some changes/decisions might be made unnoticed by PM and cards are not updated by the time status meeting starts. Task owner makes correction during this time.
+                </div>
+                
+                <div class="space-y-3 text-sm">
+                    <!-- Backlog -->
+                    <div class="bg-white rounded p-3 border-l-4 border-gray-400">
+                        <h3 class="font-bold text-gray-700 mb-2">📋 Backlog</h3>
+                        <ul class="text-gray-600 space-y-1 ml-4">
+                            <li>• List of product backlog</li>
+                            <li>• PM creates when confirmed with PO</li>
+                        </ul>
+                        <div class="mt-2 bg-gray-100 rounded p-2 text-xs text-gray-600">
+                            <span class="font-semibold">Remark:</span> For general team's tasks, inform PM to create via #pmo-dev, #pmo-design, QSquad channel, or create own task and notify @PM.
+                        </div>
+                    </div>
+                    
+                    <!-- Spec -->
+                    <div class="bg-white rounded p-3 border-l-4 border-blue-400">
+                        <h3 class="font-bold text-blue-600 mb-2">📝 Spec</h3>
+                        <ul class="text-gray-600 space-y-1 ml-4">
+                            <li>• PO moves card from Backlog to Spec when starts working on Spec</li>
+                            <li>• PO creates Spec subtask and add reviewers as shared Owners</li>
+                            <li>• PO moves to Spec done when finalized</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Spec Done -->
+                    <div class="bg-white rounded p-3 border-l-4 border-indigo-400">
+                        <h3 class="font-bold text-indigo-600 mb-2">✅ Spec Done</h3>
+                        <ul class="text-gray-600 space-y-1 ml-4">
+                            <li>• PM creates to-do list on description for required team as stated in Mellowmatic (Design, BE, FE, + QA Prep) and assign team lead or designated owner</li>
+                            <li>• PM check Mellowmatic and reflects estimated plan/subtasks on the card</li>
+                            <li>• PM or Team that is ready to start moves card to Working state</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Working -->
+                    <div class="bg-white rounded p-3 border-l-4 border-green-400">
+                        <h3 class="font-bold text-green-600 mb-2">⚙️ Working</h3>
+                        <ul class="text-gray-600 space-y-1 ml-4">
+                            <li>• When task is done, task owner is unassigned and reassign the next person based on checklists</li>
+                            <li>• If rejected, reviewer reassigns back to task owner</li>
+                            <li>• If approved, reviewer assign mergers or release engineers</li>
+                            <li>• Release engineers or PM moves card to On Hold/Waiting until QA is ready to start</li>
+                        </ul>
+                        <div class="mt-2 bg-gray-100 rounded p-2 text-xs text-gray-600">
+                            <span class="font-semibold">Remark:</span> Dev teams only update on their part regardless of other teams' status sharing the same card.
+                        </div>
+                    </div>
+                    
+                    <!-- QA Testing -->
+                    <div class="bg-white rounded p-3 border-l-4 border-purple-400">
+                        <h3 class="font-bold text-purple-600 mb-2">🧪 QA Testing</h3>
+                        <ul class="text-gray-600 space-y-1 ml-4">
+                            <li>• QA moves card from On Hold/Waiting state when QA is ready to start testing</li>
+                            <li>• QA add new checklists for testing with estimation</li>
+                            <li>• If Rejected, QA moves card to Fix bugs and reassign to Dev in charge or PM</li>
+                            <li>• If Passed, QA reassigns main card back to Release engineers</li>
+                        </ul>
+                        <div class="mt-2 bg-gray-100 rounded p-2 text-xs text-gray-600">
+                            <span class="font-semibold">Remark:</span> QA Prep task includes all preparation stage; test case, test plan, etc., this can start at the Spec done state
+                        </div>
+                    </div>
+                    
+                    <!-- Fix Bugs -->
+                    <div class="bg-white rounded p-3 border-l-4 border-red-400">
+                        <h3 class="font-bold text-red-600 mb-2">🐛 Fix Bugs</h3>
+                        <ul class="text-gray-600 space-y-1 ml-4">
+                            <li>• Dev add checklist for support/Fix bugs</li>
+                            <li>• Use the same review process as in Working state</li>
+                            <li>• Release engineers/PM reassigns QA and moves to On Hold/Waiting until QA is ready to start</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Done -->
+                    <div class="bg-white rounded p-3 border-l-4 border-green-600">
+                        <h3 class="font-bold text-green-700 mb-2">🎉 Done</h3>
+                        <ul class="text-gray-600 space-y-1 ml-4">
+                            <li>• PO/PM/Release engineers confirm and move task to Done</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tool Usage Matrix -->
+        <section class="mb-8">
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <i data-lucide="table" class="w-6 h-6 text-indigo-600"></i>
+                Tool Usage Matrix
+            </h2>
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="p-3 text-left font-semibold">Role</th>
+                            <th class="p-3 text-left font-semibold">📋 Mellowmatic</th>
+                            <th class="p-3 text-left font-semibold">📊 Gitea Board</th>
+                            <th class="p-3 text-left font-semibold">💬 Discord</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t">
+                            <td class="p-3 font-semibold text-amber-600">PO</td>
+                            <td class="p-3">Create main tasks, story acceptance</td>
+                            <td class="p-3">Verify main task completion, support dev gap</td>
+                            <td class="p-3">Inform PM of new tasks and priority on products' main channel</td>
+                        </tr>
+                        <tr class="border-t bg-gray-50">
+                            <td class="p-3 font-semibold text-blue-600">PM</td>
+                            <td class="p-3">Create team tasks from main task, track all work</td>
+                            <td class="p-3">Create/update main task status (aggregated view)</td>
+                            <td class="p-3">Coordinate teams via threads</td>
+                        </tr>
+                        <tr class="border-t">
+                            <td class="p-3 font-semibold text-green-600">Dev</td>
+                            <td class="p-3">Check details, estimate date/effort</td>
+                            <td class="p-3">Ensure correct progress</td>
+                            <td class="p-3">#pmo-dev, #pmo-design for priority, working thread for progress</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Priority Communication -->
+        <section class="mb-8">
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <i data-lucide="message-square" class="w-6 h-6 text-indigo-600"></i>
+                Where to Check Priority? (unless urgent changes requested by PO)
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white rounded-lg shadow p-4 border-l-4 border-amber-500">
+                    <h3 class="font-bold text-lg mb-2">🎯 PO</h3>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-600"><span class="font-semibold">Update in Backlog list</span></p>
+                        <p class="text-gray-600"><span class="font-semibold">Update in Product Discord thread</span> (with PM and related team)</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4 border-l-4 border-green-500">
+                    <h3 class="font-bold text-lg mb-2">🧪 QA</h3>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-600"><span class="font-semibold">Product's #text channel by PM</span> (QSquad server)</p>
+                        <p class="text-gray-600"><span class="font-semibold">Product backlog list</span> (per product view)</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4 border-l-4 border-pink-500">
+                    <h3 class="font-bold text-lg mb-2">🎨 Design</h3>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-600"><span class="font-semibold">#pmo-design channel by PM</span> (TW server)</p>
+                        <p class="text-gray-600"><span class="font-semibold">Product backlog list</span> (per product view)</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4 border-l-4 border-green-600">
+                    <h3 class="font-bold text-lg mb-2">💻 Dev</h3>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-600"><span class="font-semibold">#pmo-dev channel by PM</span> (TW server)</p>
+                        <p class="text-gray-600"><span class="font-semibold">Product backlog list</span> (per product view)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cross-Role Sync -->
+        <section class="mb-8">
+            <div class="bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                <h3 class="font-bold text-indigo-900 mb-3 flex items-center gap-2">
+                    <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                    Cross-Role Sync Points
+                </h3>
+                <div class="space-y-3 text-sm">
+                    <!-- Row 1 -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="bg-white rounded p-3">
+                            <span class="font-semibold text-amber-600">PO → PM:</span> Priority changes
+                        </div>
+                        <div class="bg-white rounded p-3">
+                            <span class="font-semibold text-amber-600">PO → Dev:</span> Requirements clarification
+                        </div>
+                        <div class="bg-white rounded p-3">
+                            <span class="font-semibold text-amber-600">PO → QA:</span> Feature ready for testing
+                        </div>
+                    </div>
+                    <!-- Row 2 -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="bg-white rounded p-3">
+                            <span class="font-semibold text-blue-600">PM → Dev:</span> Blocker escalation
+                        </div>
+                        <div class="bg-white rounded p-3">
+                            <span class="font-semibold text-blue-600">PM → PO:</span> Timeline adjustments
+                        </div>
+                        <div class="bg-white rounded p-3">
+                            <span class="font-semibold text-purple-600">QA → PO/PM:</span> Bug reports and issues
+                        </div>
+                    </div>
+                    <!-- Row 3 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-2xl mx-auto">
+                        <div class="bg-white rounded p-3">
+                            <span class="font-semibold text-green-600">Dev → PM:</span> Progress updates
+                        </div>
+                        <div class="bg-white rounded p-3">
+                            <span class="font-semibold text-green-600">Dev → PO:</span> PR ready for review
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
